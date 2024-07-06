@@ -2,23 +2,30 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "5.55.0"
+      version = "<=5.40.0"
     }
+  }
+  backend "s3" {
+    bucket = "body-425"
+    key    = "backend/dev/jay/terraformstate"
+    region = "eu-west-2"
   }
 }
 
+
+
 provider "aws" {
-  region = "eu-west-2"
+  region = var.region
 }
 
 provider "aws" {
   alias  = "new"
-  region = "us-west-2"
+  region = var.region1
 }
 
 
 resource "aws_iam_user" "test" {
-  name = "akua"
+  name = var.user_name
 
 }
 
@@ -41,7 +48,7 @@ data "aws_iam_policy_document" "fuse" {
 }
 
 resource "aws_iam_policy" "policy1" {
-  name   = "akuapolicy"
+  name   = var.policy_name
   path   = "/"
   policy = data.aws_iam_policy_document.fuse.json
 }
@@ -57,27 +64,27 @@ resource "aws_iam_user_policy_attachment" "test-attach" {
 
 resource "aws_iam_user_policy_attachment" "test-attach2" {
   user       = aws_iam_user.test.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+  policy_arn = var.policy_arn
 }
 
 
 resource "aws_instance" "this" {
-  ami           = "ami-053a617c6207ecc7b"
-  instance_type = "t2.micro"
+  ami           = var.ami_this
+  instance_type = var.instance_type_this
 
   tags = {
-    Name = "NanaAba"
+    Name = var.tagName
   }
 }
 
 
 resource "aws_instance" "that" {
-  ami           = "ami-0cf2b4e024cdb6960"
+  ami           = var.ami_that
   provider = aws.new
-  instance_type = "t2.micro"
+  instance_type = var.instance_type_that
 
   tags = {
-    Name = "Aba"
+    Name = var.tagName1
   }
 }
 
