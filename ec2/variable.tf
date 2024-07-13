@@ -14,17 +14,7 @@ variable "region1" {
   
 }
 
-variable "user_name" {
- #   default = "akua"
-  type = string
-  description = "iam user name"
-}
 
-variable "policy_name" {
-  default = "akuapolicy"
-  type = string
-  description = "iam user policy name"
-}
 
 variable "ami_this" { 
 default = "ami-053a617c6207ecc7b"
@@ -54,8 +44,3 @@ variable "tagName1" {
   
 }
 
-variable "policy_arn" {
-    default = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
-    type = string
-  
-}
