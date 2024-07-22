@@ -15,7 +15,7 @@ variable "region1" {
 }
 
 variable "user_name" {
- #   default = "akua"
+   default = "akua"
   type = string
   description = "iam user name"
 }

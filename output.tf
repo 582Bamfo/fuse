@@ -1,8 +1,8 @@
 
-# output "ec2ip" {
-#   value = aws_instance.this.public_ip
-# }
+output "ec2ip" {
+  value = module.server.ec2ip
+}
 
-# output "akuaid" {
-#   value = aws_iam_user.test.id
-# }
+output "akuaid" {
+  value = module.user.akuaid
+}
