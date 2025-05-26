@@ -4,6 +4,7 @@ resource "aws_iam_user" "test" {
 }
 
 
+
 resource "aws_iam_policy" "policy1" {
   name   = var.policy_name
   path   = "/"

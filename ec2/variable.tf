@@ -35,7 +35,7 @@ variable "instance_type_that" {
 }
 
 variable "tagName" {
-    default = "NanaAba"
+    default = "beta"
   
 }
 

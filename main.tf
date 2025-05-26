@@ -1,6 +1,6 @@
 module "user" {
   source = "./iam"
-  user_name = var.user_name
+  user_name = "${var.user_name}"
   policy_name = "policyname1"
 }
 
@@ -17,4 +17,8 @@ module "s3-bucket" {
 module "myvpc" {
   source = "github.com/terraform-aws-modules/terraform-aws-vpc"
   name = "stage"
+}
+
+resource "aws_iam_group" "test_import" {
+  name = "dev"
 }
